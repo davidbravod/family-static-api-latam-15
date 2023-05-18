@@ -59,6 +59,17 @@ def get_member(member_id):
 
     return jsonify(member), 200
 
+@app.route('/member/<int:member_id>', methods=['PUT'])
+def update_member(member_id):
+    member_data = request.get_json()
+    if not member_data:
+        return jsonify({'msg': 'Bad Request'}), 400
+
+    updated_member = jackson_family.update_member(member_id, member_data)
+    if updated_member is None:
+        return jsonify({'msg': 'Member not found'}), 404
+
+    return jsonify(updated_member), 200
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':

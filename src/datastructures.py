@@ -45,6 +45,14 @@ class FamilyStructure:
                 return member
 
         return None
+    
+    def update_member(self, id, member):
+        for idx, existing_member in enumerate(self._members):
+            if existing_member["id"] == id:
+                self._members[idx].update(member)
+                return self._members[idx]
+        return None
+
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
